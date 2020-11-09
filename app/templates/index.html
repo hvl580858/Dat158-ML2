@@ -1,0 +1,51 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Deployment{% endblock %}
+
+{% block navbar %}
+    <div class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}">Box Office</a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbarToggleExternalContent">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Data dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    <div class='container'>
+        <p>Predict a patient's length of stay in the hospital by filling out the below information. The data is fed to a
+            machine learning model trained on historical data.</p>
+    </div>
+
+    <div class='container'>
+        {{ wtf.quick_form(form) }}
+    </div>
+
+    <div class='container'>
+
+        <h3>{% if session.get('pred') %} The predicted length of stay in the hospital is
+            {{ session.get('pred')['pred'] }} days.</h3>
+
+            <h4>Probabilities: {{ session.get('pred')['uncertainty'] }}
+        {% else %} {% endif %}</h4>
+        <br>
+        <h4>User information: {{ session.get('user_info') }}</h4>
+
+    </div>
+
+{% endblock %}

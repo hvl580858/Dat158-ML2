@@ -1,0 +1,12 @@
+gunicorn
+flask
+numpy
+pandas
+jupyter
+flask-bootstrap4
+matplotlib
+seaborn
+lightgbm
+eli5
+xgboost
+sklearn
