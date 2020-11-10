@@ -1,14 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, FloatField, SelectField, SelectField, RadioField, BooleanField, SubmitField
+from wtforms import StringField, IntegerField, FloatField, SelectField, SelectField, RadioField, BooleanField, \
+    SubmitField
 from wtforms.validators import DataRequired, NumberRange
 
 
 class DataForm(FlaskForm):
-
     """
-    The form for entering values during patient encounter. Feel free to add additional
-    fields for the remaining features in the data set (features missing in the form
-    are set to default values in `predict.py`).
+    The form for entering values for prediction of movie box value. We need to figure out what values we
+    should use and what we can leave as median values.
+    (features missing in the form are set to default values in `predict.py`).
     """
 
     rcount = IntegerField('Number of readmissions past 180 days', validators=[DataRequired()])
@@ -23,4 +23,3 @@ class DataForm(FlaskForm):
     malnutrition = BooleanField(label='Malnutrition')
 
     submit = SubmitField('Submit')
-

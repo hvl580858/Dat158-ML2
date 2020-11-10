@@ -27,9 +27,10 @@
 
 {% block content %}
 
-    <div class='container'>
-        <p>Predict a patient's length of stay in the hospital by filling out the below information. The data is fed to a
-            machine learning model trained on historical data.</p>
+    <div class='container jumbotron'>
+        <h1 class="text-primary">Predict the value of the box office move by filling out the below information.</h1>
+        <label class="label label-info">The information is fed through our trained machine learning model based on
+            historical data</label>
     </div>
 
     <div class='container'>
@@ -38,13 +39,12 @@
 
     <div class='container'>
 
-        <h3>{% if session.get('pred') %} The predicted length of stay in the hospital is
-            {{ session.get('pred')['pred'] }} days.</h3>
+        <h3>{% if session.get('pred') %} The predicted worldwide box office value is
+            {{ session.get('pred')['pred'] }} $</h3>
 
             <h4>Probabilities: {{ session.get('pred')['uncertainty'] }}
         {% else %} {% endif %}</h4>
-        <br>
-        <h4>User information: {{ session.get('user_info') }}</h4>
+
 
     </div>
 

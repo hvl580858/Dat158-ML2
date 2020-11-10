@@ -28,5 +28,6 @@ def preprocess(data):
         'director_Peter Hyams': 0.003000,
         'title_length': 15.127873
     }
+    # Replace median values with values from form via 'for'
 
-    return 1
+    return feature_values

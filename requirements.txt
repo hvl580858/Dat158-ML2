@@ -1,7 +1,7 @@
 gunicorn
-flask
-numpy
-pandas
+flask~=1.1.2
+numpy~=1.19.4
+pandas~=1.1.4
 jupyter
 flask-bootstrap4
 matplotlib
@@ -10,3 +10,6 @@ lightgbm
 eli5
 xgboost
 sklearn
+flask-wtf
+WTForms~=2.3.3
+joblib~=0.17.0

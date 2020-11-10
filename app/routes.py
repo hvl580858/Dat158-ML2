@@ -11,7 +11,7 @@ app.config['SECRET_KEY'] = 'BoxOfficeDat158'
 @app.route('/index', methods=['GET', 'POST'])
 def index():
     form = DataForm()
-    session['pred'] = 'Test'
+    #session['pred'] = 'Test'
 
     return render_template('index.html', form=form)
 
