@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import joblib
 
-model = joblib.load('models/dat158-ml2-model.joblib')
+#model = joblib.load('models/dat158-ml2-model.joblib')
 
 
 def preprocess(data):
@@ -31,3 +31,11 @@ def preprocess(data):
     # Replace median values with values from form via 'for'
 
     return feature_values
+
+
+def predict(data):
+    return data
+
+
+def postprocess(data):
+    return data

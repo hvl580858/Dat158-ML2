@@ -10,16 +10,27 @@ class DataForm(FlaskForm):
     should use and what we can leave as median values.
     (features missing in the form are set to default values in `predict.py`).
     """
+    budget = IntegerField('Movie budget', validators=[DataRequired(0)])
 
-    rcount = IntegerField('Number of readmissions past 180 days', validators=[DataRequired()])
-    gender = IntegerField('Gender. 0=Male, 1=Female', validators=[NumberRange(min=0, max=1)])
+    my_choices = [(0, 'Other'), (1, 'Family'), (1, 'Action'), (1, 'Adventure'), (1, 'Fantasy')]
+    genre = SelectField('Movie in one of the following genres', choices=my_choices)
 
-    bmi = FloatField('Average BMI during encounter')
-    sodium = FloatField('Average sodium level during encounter')
+    runtime = IntegerField('Movie runtime', validators=[DataRequired(), NumberRange(0)])
 
-    asthma = BooleanField(label='Asthma')
-    irondef = BooleanField(label='Iron deficiency')
-    depress = BooleanField(label='Depression')
-    malnutrition = BooleanField(label='Malnutrition')
+    popularity = FloatField('Move popularity', validators=[DataRequired(), NumberRange(0.0, 300.0)])
+
+    tagline = BooleanField(label='Move have a tagline')
+
+    belongs_to_collection = BooleanField(label='Move belongs to collection')
+
+    homepage = BooleanField(label='Move have a webpage')
+
+    orig_language = BooleanField(label='English is original language')
+
+    release_year = IntegerField('Year of release', validators=[DataRequired(), NumberRange(1920)])
+
+    release_month = IntegerField('Month of release', validators=[DataRequired(), NumberRange(1, 12)])
 
     submit = SubmitField('Submit')
+
+
