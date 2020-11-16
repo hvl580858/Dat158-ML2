@@ -13,3 +13,7 @@ sklearn
 flask-wtf
 WTForms~=2.3.3
 joblib~=0.17.0
+flask-heroku
+flask-SQLAlchemy
+Jinja2
+flask_cors

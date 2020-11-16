@@ -1,6 +1,7 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}HospitalApp{% endblock %}
+{% block title %}Box-Office revenue - Dashboard{% endblock %}
+{% block styles %}{{ super() }}<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> {% endblock %}
 
 {% block navbar %}
     <div class="navbar navbar-expand-lg navbar-dark bg-dark" role="navigation">
@@ -28,12 +29,28 @@
 {% block content %}
     <div class='container'>
         <div class='page-header'>
-            <h1>Welcome to the dashboard!</h1>
+            <h1>Here is your previous predictions</h1>
         </div>
     </div>
 
     <div class='container'>
-        <h3><em>TO BE ADDED</em></h3>
+        <table class="predict-table table-striped table-bordered">
+            <tr>
+                <th class="text-center">Movie name</th>
+                <th class="text-center">Prediction</th>
+                <th class="text-center">Correct revenue</th>
+                <th class="text-center">Update correct revenue</th>
+            </tr>
 
+                {% for i in old_pred %}
+                    <tr>
+                        <td class="text-center">{{ i[0] }}</td>
+                        <td class="text-center">{{ i[1] }}</td>
+                        <td ><input style="width:100%" type="number" value="{{ i[2] }}"></td>
+                    <td class="text-center"><button>Update</button></td>
+                    </tr>
+                {% endfor %}
+
+        </table>
     </div>
 {% endblock %}

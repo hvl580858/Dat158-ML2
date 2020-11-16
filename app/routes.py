@@ -1,11 +1,15 @@
 from app import app
 from flask import render_template, session, redirect, url_for, request
 from app.predict import preprocess, predict, postprocess
+from flask_sqlalchemy import SQLAlchemy
 import pickle
+import os
 
 from app.forms import DataForm
 
 app.config['SECRET_KEY'] = 'BoxOfficeDat158'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+db = SQLAlchemy(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -29,4 +33,8 @@ def index():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    old_pred_list = []
+
+
+
+    return render_template('dashboard.html', old_pred=old_pred_list)

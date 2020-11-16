@@ -12,7 +12,8 @@ class DataForm(FlaskForm):
     """
     budget = IntegerField('Movie budget', validators=[DataRequired(0)])
 
-    genre = SelectField('Movie in one of the following genres', choices=[(0, 'Other'), (1, 'Family'), (1, 'Action'), (1, 'Adventure'), (1, 'Fantasy')])
+    genre = SelectField('Movie in one of the following genres',
+                        choices=[(0, 'Other'), (1, 'Family'), (1, 'Action'), (1, 'Adventure'), (1, 'Fantasy')])
 
     runtime = IntegerField('Movie runtime', validators=[DataRequired(), NumberRange(0)])
 
@@ -31,5 +32,3 @@ class DataForm(FlaskForm):
     release_month = IntegerField('Month of release', validators=[DataRequired(), NumberRange(1, 12)])
 
     submit = SubmitField('Submit')
-
-
