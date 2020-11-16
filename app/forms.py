@@ -12,8 +12,7 @@ class DataForm(FlaskForm):
     """
     budget = IntegerField('Movie budget', validators=[DataRequired(0)])
 
-    my_choices = [(0, 'Other'), (1, 'Family'), (1, 'Action'), (1, 'Adventure'), (1, 'Fantasy')]
-    genre = SelectField('Movie in one of the following genres', choices=my_choices)
+    genre = SelectField('Movie in one of the following genres', choices=[(0, 'Other'), (1, 'Family'), (1, 'Action'), (1, 'Adventure'), (1, 'Fantasy')])
 
     runtime = IntegerField('Movie runtime', validators=[DataRequired(), NumberRange(0)])
 
