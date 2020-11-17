@@ -38,7 +38,7 @@ def preprocess(data):
 
 def predict(data):
     column_order = []
-    data = np.array([data[feature] for feature in column_order], dtype=object)
+    #data = np.array([data[feature] for feature in column_order], dtype=object)
     # pred = model.predict(data.reshape(1, -1))
     # uncertainty = model.predict_proba(data.reshape(1, -1))
     return data
