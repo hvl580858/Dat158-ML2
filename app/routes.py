@@ -5,7 +5,7 @@ from flask import render_template, session, redirect, url_for
 from app import app
 from app.forms import DataForm
 from app.predict import preprocess, predict, postprocess
-from app.database import execute_sql
+from app.database import execute_sql_select, execute_sql_insert
 
 app.config['SECRET_KEY'] = 'BoxOfficeDat158'
 
@@ -24,9 +24,10 @@ def index():
 
         title = "Test2"
         pred_value = 20
+        corr_value = 21
         session['pred'] = pred
-        sql = """insert into prediction values (%(title)s, %(prediction)s, 0)"""
-        execute_sql(sql, {"title": title, "predicted_value": pred_value})
+        sql = """insert into prediction values (%s, %s, %s)"""
+        execute_sql_insert(sql, (title, pred_value, corr_value))
         return redirect(url_for('index'))
 
     return render_template('index.html', form=form)
@@ -35,5 +36,5 @@ def index():
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
     sql = """select * from prediction"""
-    old_pred_list = execute_sql(sql, {})
+    old_pred_list = execute_sql_select(sql, {})
     return render_template('dashboard.html', old_pred=old_pred_list)
