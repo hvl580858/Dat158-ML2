@@ -10,16 +10,16 @@ def preprocess(data):
     feature_values = {
         'belongs_to_collection': NaN,
         'budget': 2.266000e+07,
+        'original_language': 11.454297,
         'popularity': 8.47,
+        'production_countries': "US",
         'runtime': 107.9,
         'tagline': "likely having a tagline",
+        'release_year': 2000,
+        'release_month': 7,
+        'budget_year_ratio': 5.64,
+        'all_genres': 435,
 
-        'release_year': 1999.675233,
-        'release_month': 6.889015,
-        'budget_year_ratio': 0.358572,
-
-        'homepage': 0.677126,
-        'original_language': 11.454297,
     }
     # Replace median values with values from form via 'for'
     for key in [k for k in data.keys() if k in feature_values.keys()]:
