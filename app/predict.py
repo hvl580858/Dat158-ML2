@@ -24,19 +24,20 @@ def preprocess(data):
     }
 
     for key in [k for k in data.keys() if k in feature_values.keys()]:
-        budget = 1
-        year = 1
-        if key == 'budget':
-            budget = data[key]
-        if key == 'release_year':
-            year = data[key]
-        # if key == 'budget_year_ratio':
-
         feature_values[key] = data[key]
 
     df = pd.DataFrame(feature_values, index=[0])
 
     # Budget year ratio
+    budget = 1
+    year = 1
+    for key in feature_values.keys():
+        if key == 'budget':
+            budget = data[key]
+        if key == 'release_year':
+            year = data[key]
+        if key == 'budget_year_ratio':
+            feature_values[key] = budget / (year * year)
 
     df = pipeline.transform(df)
 

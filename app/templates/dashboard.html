@@ -46,9 +46,10 @@
             {% for i in old_pred %}
                 <form action="update" method="POST">
                     <tr>
-                        <td><input type="text" name="rev_name" value="{{ i[0] }}"></td>
-                        <td class="text-center">{{ i[1] }}<input type="hidden" name="pred" value="{{ i[1] }}"></td>
-                        <td><label><input name="cor_rev" style="width:100%" type="text" value="{{ i[2] }}"></label>
+                        <td><input type="hidden" value="{{ i[0] }}">
+                            <input type="text" name="rev_name" value="{{ i[1] }}"></td>
+                        <td class="text-center">{{ i[2] }}<input type="hidden" name="pred" value="{{ i[2] }}"></td>
+                        <td><label><input name="cor_rev" style="width:100%" type="text" value="{{ i[3] }}"></label>
                         </td>
                         <td class="text-center">
                             <button>Update</button>

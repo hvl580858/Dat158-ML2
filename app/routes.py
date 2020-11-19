@@ -27,7 +27,7 @@ def index():
             corr_value = 0
             session['pred'] = "${:,.2f}".format(float(pred['pred']))
             print(session['pred'])
-            sql = """insert into prediction values (%s, %s, %s)"""
+            sql = """insert into prediction (title, predicted_value, corrected_value) values (%s, %s, %s)"""
             execute_sql_insert(sql, (title, pred_value, corr_value))
             return redirect(url_for('index'))
         else:
@@ -35,8 +35,6 @@ def index():
             print(form.errors)
 
     else:
-        pred = session.get('pred')
-        print('Get', pred)
         return render_template('index.html', form=form)
 
 

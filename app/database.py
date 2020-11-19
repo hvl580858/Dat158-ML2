@@ -38,7 +38,6 @@ def execute_sql_insert(sql, params):
         cursor.execute(sql, params)
         connection.commit()
         count = cursor.rowcount
-        print(count, "Record inserted successfully")
     except (Exception, psycopg2.Error) as error:
         print("Insert error ", error)
     finally:
