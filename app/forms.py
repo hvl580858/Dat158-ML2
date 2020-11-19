@@ -25,11 +25,11 @@ class DataForm(FlaskForm):
 
     runtime = IntegerField('Movie runtime', validators=[DataRequired()])
 
-    popularity = FloatField('Move popularity', validators=[DataRequired()])
+    popularity = FloatField('Movie popularity', validators=[DataRequired()])
 
-    tagline = BooleanField(label='Move have a tagline')
+    tagline = BooleanField(label='Movie have a tagline')
 
-    belongs_to_collection = BooleanField(label='Move belongs to collection')
+    belongs_to_collection = BooleanField(label='Movie belongs to collection')
 
     original_language = SelectField('Select original language',
                                     choices=[(7, 'English'), (2, 'Korean'), (11, 'French'), (16, 'Italian'),

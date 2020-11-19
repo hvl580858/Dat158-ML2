@@ -13,26 +13,34 @@ app.config['SECRET_KEY'] = 'BoxOfficeDat158'
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    form = DataForm()
-    if form.validate_on_submit():
-        print("Sucess")
-        for fieldname, value in form.data.items():
-            session[fieldname] = value
+    if request.method == 'POST':
+        form = DataForm()
+        if form.validate_on_submit():
+            print("Sucess")
+            for fieldname, value in form.data.items():
+                session[fieldname] = value
 
-        data = preprocess(session)
-        pred = predict(data)
-        pred = postprocess(pred)
-        title = "Not implemented"
-        pred_value = pred
-        corr_value = 0
-        session['pred'] = pred
-        sql = """insert into prediction values (%s, %s, %s)"""
-        execute_sql_insert(sql, (title, pred_value, corr_value))
-        return redirect(url_for('index'))
+            data = preprocess(session)
+            pred = predict(data)
+            pred = postprocess(pred)
+            title = "Not implemented"
+            pred_value = "${:,.2f}".format(float(pred['pred']))
+            corr_value = 0
+            session['pred'] = "${:,.2f}".format(float(pred['pred']))
+            sql = """insert into prediction values (%s, %s, %s)"""
+            execute_sql_insert(sql, (title, pred_value, corr_value))
+            return redirect(url_for('index'))
+        else:
+            session['pred'] = ''
+            print("Not valid")
+            print(form.errors)
+
     else:
-        print("Not valid")
-        print(form.errors)
-    return render_template('index.html', form=form)
+        form = DataForm()
+        return render_template('index.html', form=form)
+
+
+
 
 
 @app.route('/dashboard', methods=['GET'])
