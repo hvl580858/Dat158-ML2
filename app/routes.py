@@ -13,10 +13,9 @@ app.config['SECRET_KEY'] = 'BoxOfficeDat158'
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
+    form = DataForm()
     if request.method == 'POST':
-        form = DataForm()
         if form.validate_on_submit():
-            print("Sucess")
             for fieldname, value in form.data.items():
                 session[fieldname] = value
 
@@ -27,20 +26,18 @@ def index():
             pred_value = "${:,.2f}".format(float(pred['pred']))
             corr_value = 0
             session['pred'] = "${:,.2f}".format(float(pred['pred']))
+            print(session['pred'])
             sql = """insert into prediction values (%s, %s, %s)"""
             execute_sql_insert(sql, (title, pred_value, corr_value))
             return redirect(url_for('index'))
         else:
             session['pred'] = ''
-            print("Not valid")
             print(form.errors)
 
     else:
-        form = DataForm()
+        pred = session.get('pred')
+        print('Get', pred)
         return render_template('index.html', form=form)
-
-
-
 
 
 @app.route('/dashboard', methods=['GET'])
@@ -48,3 +45,12 @@ def dashboard():
     sql = """select * from prediction"""
     old_pred_list = execute_sql_select(sql, {})
     return render_template('dashboard.html', old_pred=old_pred_list)
+
+
+@app.route('/update', methods=['POST'])
+def update():
+    name = request.form.get('rev_name')
+    cor_rev = request.form.get('cor_rev')
+    pred = request.form.get('pred')
+    print(name, pred, cor_rev)
+    return redirect(url_for('dashboard'))

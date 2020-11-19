@@ -7,6 +7,7 @@ pipeline = joblib.load("model/pipeline.joblib")
 
 
 def preprocess(data):
+    data.update({'budget_year_ratio': 0})
     feature_values = {
         'belongs_to_collection': 1,
         'budget': 2.266000e+07,
@@ -21,39 +22,41 @@ def preprocess(data):
         'all_genres': 435,
 
     }
-    # Replace median values with values from form via 'for'
+
     for key in [k for k in data.keys() if k in feature_values.keys()]:
+        budget = 1
+        year = 1
+        if key == 'budget':
+            budget = data[key]
+        if key == 'release_year':
+            year = data[key]
+        # if key == 'budget_year_ratio':
+
         feature_values[key] = data[key]
+
     df = pd.DataFrame(feature_values, index=[0])
 
     # Budget year ratio
 
     df = pipeline.transform(df)
-    print(df)
-    # feature_values = dict(enumerate(df.flatten(), 0))
+
     return df
 
 
 def predict(data):
     column_order = ['belongs_to_collection', 'budget', 'original_language', 'popularity', 'production_countries',
                     'runtime', 'tagline', 'release_year', 'release_month', 'budget_year_ratio', 'all_genres']
-    # data = np.array([data[feature] for feature in column_order], dtype=object)
     pred = model.predict(data.reshape(1, -1))
-    print(pred)
-    # uncertainty = model.predict_proba(data.reshape(1, -1))
-    return pred  # , uncertainty
+
+    return pred
 
 
-def postprocess(prediction):
-    # pred, uncertainty = prediction
-    pred = prediction
+def postprocess(pred):
     try:
         int(pred[0]) > 0
     except ValueError:
         pass
 
     pred = str(pred[0])
-    # uncertainty = str(uncertainty[0])
-    print(prediction)
-    return_dict = {'pred': pred}  # , 'uncertainty': uncertainty}
+    return_dict = {'pred': pred}
     return return_dict

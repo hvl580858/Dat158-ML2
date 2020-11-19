@@ -34,7 +34,7 @@
 
 
         <h3 class="mt-3">{% if session.get('pred') %} The predicted worldwide box office value is
-            {{ session.get('pred') }}</h3>
+            {{ session.pop('pred') }}</h3>
         {% endif %}
     </div>
 

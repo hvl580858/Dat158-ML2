@@ -18,6 +18,7 @@ class DataForm(FlaskForm):
                                       ('Documentary', 'Documentary'), ('Family Music', 'Family Music'),
                                       ('Foreign', 'Foreign'), ('Western', 'Western')])
     """
+
     budget = IntegerField('Movie budget', validators=[DataRequired()])
 
     all_genres = SelectField('Movie in one of the following genres',
