@@ -1,6 +1,6 @@
 import os
 
-from flask import render_template, session, redirect, url_for
+from flask import render_template, session, redirect, url_for, request
 
 from app import app
 from app.forms import DataForm
@@ -15,21 +15,23 @@ app.config['SECRET_KEY'] = 'BoxOfficeDat158'
 def index():
     form = DataForm()
     if form.validate_on_submit():
+        print("Sucess")
         for fieldname, value in form.data.items():
             session[fieldname] = value
 
         data = preprocess(session)
         pred = predict(data)
-        # pred = postprocess(pred)
-
-        title = "Test2"
-        pred_value = 20
-        corr_value = 21
+        pred = postprocess(pred)
+        title = "Not implemented"
+        pred_value = pred
+        corr_value = 0
         session['pred'] = pred
         sql = """insert into prediction values (%s, %s, %s)"""
         execute_sql_insert(sql, (title, pred_value, corr_value))
         return redirect(url_for('index'))
-
+    else:
+        print("Not valid")
+        print(form.errors)
     return render_template('index.html', form=form)
 
 
