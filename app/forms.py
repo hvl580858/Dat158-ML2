@@ -22,7 +22,7 @@ class DataForm(FlaskForm):
     budget = IntegerField('Movie budget', validators=[DataRequired()])
 
     all_genres = SelectField('Movie in one of the following genres',
-                             choices=[(305, 'Something'), (186, 'Comedy'), (266, 'Drama')])
+                             choices=[(305, 'Romantic Drama Comedy'), (186, 'Comedy'), (266, 'Drama'), (520, "Horror Thriller"), (480, "Porn"),  ])
 
     runtime = IntegerField('Movie runtime', validators=[DataRequired()])
 
@@ -38,8 +38,8 @@ class DataForm(FlaskForm):
                                              (18, 'Chinese')])
 
     production_countries = SelectField('Select production country',
-                                       choices=[(275, 'USA'), (204, 'GreatBritain'),
-                                                (233, 'India'), (0, 'France')])
+                                       choices=[(275, 'USA'), (222, 'USA & UK' ), (204, 'United Kingdom'),
+                                                (233, 'India'), (176, 'France'), (241, 'Russia'), (151, 'Germany'), (216 ,'China')])
 
     release_year = IntegerField('Year of release', validators=[DataRequired()])
 
