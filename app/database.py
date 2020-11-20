@@ -1,5 +1,15 @@
 import psycopg2
 
+"""
+Execute sql selects:
+    This code was done quick and dirty just to get it to a working stage, and would be cleaned if we had more time.
+    The connection data should not be stored like this but this was the quickest way of doing it for now.
+    Would rather use the heroku variable to get the information but just to make it work on both heroku and local this 
+    became the solution.
+    
+    This one is made to execute a select and then return the value from the query.
+"""
+
 
 def execute_sql_select(sql, params):
     pred = None
@@ -25,7 +35,16 @@ def execute_sql_select(sql, params):
     return pred
 
 
-def execute_sql_insert(sql, params):
+"""
+Execute sql query:
+    Same thing here as stated above. This would be cleaned and stored in a proper manner.
+    
+    Here we use the sql string and parameters from the user to insert data to the database. 
+    This one should be able to update and delete data as well, as another implementation in the update route. 
+"""
+
+
+def execute_sql_query(sql, params):
     try:
         connection = psycopg2.connect(
             user="abjaykmgqyrfmn",
@@ -39,7 +58,7 @@ def execute_sql_insert(sql, params):
         connection.commit()
         count = cursor.rowcount
     except (Exception, psycopg2.Error) as error:
-        print("Insert error ", error)
+        print("Query error ", error)
     finally:
         if (connection):
             cursor.close()

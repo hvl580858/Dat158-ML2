@@ -6,17 +6,8 @@ from wtforms.validators import DataRequired, NumberRange, InputRequired
 
 class DataForm(FlaskForm):
     """
-    The form for entering values for prediction of movie box value. We need to figure out what values we
-    should use and what we can leave as median values.
-    (features missing in the form are set to default values in `predict.py`).
-
-
-    choices=[(186, 'Comedy'), ('Family', 'Family'), ('Action', 'Action'),
-                                      ('Adventure', 'Adventure'), ('Fantasy', 'Fantasy'), ('Thriller', 'Thriller'),
-                                      (266, 'Drama'), ('Romance', 'Romance'), ('Mystery', 'Mystery'),
-                                      ('Crime', 'Crime'), ('Animation', 'Animation'), ('Horror', 'Horror'),
-                                      ('Documentary', 'Documentary'), ('Family Music', 'Family Music'),
-                                      ('Foreign', 'Foreign'), ('Western', 'Western')])
+    The form for entering values for prediction of movie box value.
+    All values that are needed for prediction will be here as we removed a lot.
     """
     name = StringField('Enter movie name')
 
