@@ -1,1 +1,1 @@
-web: gunicorn --chdir app __init__:app
+web: gunicorn deploymentapp:app WEB_CONCURRENCY=1 --preload
