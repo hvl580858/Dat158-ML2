@@ -6,3 +6,5 @@ This is our submission for the box office task as our second project in DAT158
 ### Link to deployment on heroku : https://box-office-revenue.herokuapp.com/
 
 We have reduced the size of the training file and what parameters that the model use to predict to make this assignment easier on us.
+
+We have used kaggle for quite a bit of the notebook as kaggle hardware is quicker than our own machines.
