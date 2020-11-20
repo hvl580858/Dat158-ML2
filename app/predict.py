@@ -11,7 +11,7 @@ Preprocess:
     budget_year_ratio which turned out to be a good predictor. 
     We then convert the dict to a pandas DataFrame and run that through our pipeline.
     Output of our pipeline is a numpy Array.
-    We also grab the title from the form and remove if from the data before we start to enter the data into the 
+    We also grab the title from the form and remove it from the data before we start to enter the data into the 
     feature_values dict. 
     
 """
