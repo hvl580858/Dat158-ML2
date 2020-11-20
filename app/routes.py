@@ -19,14 +19,15 @@ def index():
             for fieldname, value in form.data.items():
                 session[fieldname] = value
 
-            data = preprocess(session)
+            data, title = preprocess(session)
             pred = predict(data)
             pred = postprocess(pred)
-            title = "Not implemented"
+
+            if title == "":
+                title = "Not given"
             pred_value = "${:,.2f}".format(float(pred['pred']))
             corr_value = 0
             session['pred'] = "${:,.2f}".format(float(pred['pred']))
-            print(session['pred'])
             sql = """insert into prediction (title, predicted_value, corrected_value) values (%s, %s, %s)"""
             execute_sql_insert(sql, (title, pred_value, corr_value))
             return redirect(url_for('index'))

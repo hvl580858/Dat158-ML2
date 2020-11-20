@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, FloatField, SelectField, SelectField, RadioField, BooleanField, \
     SubmitField
-from wtforms.validators import DataRequired, NumberRange
+from wtforms.validators import DataRequired, NumberRange, InputRequired
 
 
 class DataForm(FlaskForm):
@@ -18,13 +18,15 @@ class DataForm(FlaskForm):
                                       ('Documentary', 'Documentary'), ('Family Music', 'Family Music'),
                                       ('Foreign', 'Foreign'), ('Western', 'Western')])
     """
+    name = StringField('Enter movie name')
 
-    budget = IntegerField('Movie budget', validators=[DataRequired()])
+    budget = IntegerField('Movie budget', validators=[InputRequired()])
 
     all_genres = SelectField('Movie in one of the following genres',
-                             choices=[(305, 'Romantic Drama Comedy'), (186, 'Comedy'), (266, 'Drama'), (520, "Horror Thriller"), (480, "Porn"),  ])
+                             choices=[(305, 'Romantic Drama Comedy'), (186, 'Comedy'), (266, 'Drama'),
+                                      (520, 'Horror Thriller'), (480, 'Porn')])
 
-    runtime = IntegerField('Movie runtime', validators=[DataRequired()])
+    runtime = FloatField('Movie runtime', validators=[DataRequired()])
 
     popularity = FloatField('Movie popularity', validators=[DataRequired()])
 
@@ -38,8 +40,9 @@ class DataForm(FlaskForm):
                                              (18, 'Chinese')])
 
     production_countries = SelectField('Select production country',
-                                       choices=[(275, 'USA'), (222, 'USA & UK' ), (204, 'United Kingdom'),
-                                                (233, 'India'), (176, 'France'), (241, 'Russia'), (151, 'Germany'), (216 ,'China')])
+                                       choices=[(275, 'USA'), (222, 'USA & UK'), (204, 'United Kingdom'),
+                                                (233, 'India'), (176, 'France'), (241, 'Russia'), (151, 'Germany'),
+                                                (216, 'China')])
 
     release_year = IntegerField('Year of release', validators=[DataRequired()])
 

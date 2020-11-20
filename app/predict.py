@@ -8,6 +8,9 @@ pipeline = joblib.load("model/pipeline.joblib")
 
 def preprocess(data):
     data.update({'budget_year_ratio': 0})
+
+    name = data.pop('name', None)
+
     feature_values = {
         'belongs_to_collection': 1,
         'budget': 2.266000e+07,
@@ -26,8 +29,6 @@ def preprocess(data):
     for key in [k for k in data.keys() if k in feature_values.keys()]:
         feature_values[key] = data[key]
 
-    df = pd.DataFrame(feature_values, index=[0])
-
     # Budget year ratio
     budget = 1
     year = 1
@@ -35,19 +36,22 @@ def preprocess(data):
         if key == 'budget':
             budget = data[key]
         if key == 'release_year':
+            if feature_values[key] <= 1930:
+                feature_values[key] = 1930
             year = data[key]
         if key == 'budget_year_ratio':
-            feature_values[key] = budget / (year * year)
+            if budget > 0:
+                feature_values[key] = budget / (year * year)
+            print(feature_values[key])
 
+    df = pd.DataFrame(feature_values, index=[0])
     df = pipeline.transform(df)
 
-    return df
+    return df, name
 
 
 def predict(data):
-    column_order = ['belongs_to_collection', 'budget', 'original_language', 'popularity', 'production_countries',
-                    'runtime', 'tagline', 'release_year', 'release_month', 'budget_year_ratio', 'all_genres']
-    pred = model.predict(data.reshape(1, -1))
+    pred = np.expm1(model.predict(data.reshape(1, -1)))
 
     return pred
 
