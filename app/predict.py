@@ -42,7 +42,6 @@ def preprocess(data):
         if key == 'budget_year_ratio':
             if budget > 0:
                 feature_values[key] = budget / (year * year)
-            print(feature_values[key])
 
     df = pd.DataFrame(feature_values, index=[0])
     df = pipeline.transform(df)
