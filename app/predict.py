@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import joblib
 
-model = joblib.load('../model/model.joblib')
-pipeline = joblib.load("../model/pipeline.joblib")
+model = joblib.load('model/model.joblib')
+pipeline = joblib.load("model/pipeline.joblib")
 
 
 def preprocess(data):
